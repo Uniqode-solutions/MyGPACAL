@@ -1,4 +1,4 @@
-export const initialGrades = [[
+export const initialGrades = [
   { grade: "A+", point: 4.25 },
   { grade: "A", point: 4.0 },
   { grade: "A-", point: 3.75 },
@@ -13,4 +13,4 @@ export const initialGrades = [[
   { grade: "D-", point: 0.75 },
   { grade: "E", point: 0.00 },
   { grade: "NC", point: 0.00 },
-]]
+]

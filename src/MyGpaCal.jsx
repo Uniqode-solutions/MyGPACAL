@@ -270,7 +270,10 @@ export default function GPACalculator() {
         <Divider sx={{ my: 3 }} />
 
         <Typography variant="subtitle1" gutterBottom>
-          Added Subjects ({subjects.length})
+          Added Subjects ({subjects.length})  
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          Total Credits ({subjects?.map(s => s.credit)?.reduce((partialSum, add) => partialSum + add,0)})
         </Typography>
         {subjects.length === 0 ? (
           <Typography variant="body2" color="textSecondary">
@@ -335,6 +338,7 @@ export default function GPACalculator() {
         justifyContent: 'center',
         width: { xs: '100%', md: 200 },
         gap: 2,
+        p: 0,
         order: { xs: 0, md: 0 },
         mb: { xs: 2, md: 0 },
       }}>
@@ -351,7 +355,7 @@ export default function GPACalculator() {
 
         {gpa !== null && (
           <Paper elevation={3} sx={{ 
-            p: 2, 
+            p: 0, 
             textAlign: 'center',
             width: '100%',
           }}>
@@ -391,16 +395,19 @@ export default function GPACalculator() {
           Set your institution's grade point values
         </Typography>
 
+        <Divider sx={{ my: 3 }} />
+
+
         <Box sx={{ 
           maxHeight: "max-content", 
           overflow: 'auto', 
-          mb: 2,
+          mb: 1,
         }}>
-          {gradeSettings.map((item, index) => (
+          {gradeSettings?.sort((a,b) => a.value - b.value)?.map((item, index) => (
             <Box key={index} sx={{ 
               display: 'flex', 
               gap: 2, 
-              mb: 2, 
+              mt: 2,
               width: '100%',
               alignItems: 'center'
             }}>
@@ -453,7 +460,7 @@ export default function GPACalculator() {
           </Button>
           <Button 
             variant="outlined" 
-            onClick={() => setGradeSettings(initialGrades)}
+            onClick={() => setGradeSettings([...initialGrades])}
             fullWidth
           >
             Reset Defaults
