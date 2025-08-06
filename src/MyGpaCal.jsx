@@ -15,6 +15,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { defaultCourses } from "./courseData";
 import { initialGrades } from "./gradeData";
+import  Draggable from 'react-draggable';
 
 export default function GPACalculator() {
   // State initialization with localStorage
@@ -217,12 +218,12 @@ export default function GPACalculator() {
 
       {/* Left Column - Subject Management */}
       <Paper elevation={3} sx={{ 
-        p: { xs: 2, sm: 3 },
+        p: { xs: 3, sm: 3 },
         flex: 1,
         minWidth: 0,
         order: { xs: 1, md: 0 }
       }}>
-        <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
+        <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1.1rem', sm: '1.10rem' } }}>
           Subject Management
           <Tooltip title="Enter all your courses/subjects">
             <HelpOutlineIcon fontSize="small" sx={{ ml: 1 }} />
@@ -233,13 +234,15 @@ export default function GPACalculator() {
           display: 'flex', 
           flexDirection: { xs: 'column', sm: 'row' },
           gap: 2, 
-          mb: 2 
+          mb: 1
         }}>
           <TextField
             label="Name"
             size="small"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            sx={{ minWidth: { xs: '10%', sm: 50 } }}
+
             fullWidth
             required
           />
@@ -250,7 +253,7 @@ export default function GPACalculator() {
             onChange={(e) => setCode(e.target.value)}
             fullWidth
             required
-            sx={{ minWidth: { xs: '100%', sm: 120 } }}
+            sx={{ minWidth: { xs: '100%', sm: 50 } }}
           />
           <TextField
             label="Credit"
@@ -258,8 +261,10 @@ export default function GPACalculator() {
             size="small"
             value={credit}
             onChange={(e) => setCredit(e.target.value)}
-            sx={{ width: { xs: '100%', sm: 100 } }}
-            inputProps={{ min: 1, step: 0.5 }}
+  sx={{ 
+    width: { xs: '100%', sm: '300px' }, 
+  }}
+  inputProps={{ min: 1, step: 0.5 }}
             required
           />
         </Box>
@@ -332,15 +337,15 @@ export default function GPACalculator() {
       </Paper>
 
       {/* Middle Column - GPA Calculation */}
-      <Box sx={{ 
+       <Box sx={{ 
         display: 'flex', 
         flexDirection: { xs: 'column', md: 'column' },
         justifyContent: 'center',
-        width: { xs: '100%', md: 200 },
+        width: { xs: '100%', md: 179 },
         gap: 2,
         p: 0,
         order: { xs: 0, md: 0 },
-        mb: { xs: 2, md: 0 },
+        mb: { xs: 1, md: 0 },
       }}>
         <Button 
           variant="contained" 
@@ -375,7 +380,9 @@ export default function GPACalculator() {
         >
           Reset All
         </Button>
-      </Box>
+      </Box> 
+
+
 
       {/* Right Column - Grade Management */}
       <Paper elevation={3} sx={{ 
