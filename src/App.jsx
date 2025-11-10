@@ -1,5 +1,5 @@
-import './App.css'
-import GPACalculator from './myGpaCal'
+import './App.css';
+import GPACalculator from './MyGpaCal';
 
 const globalStyles = {
   '@global': {

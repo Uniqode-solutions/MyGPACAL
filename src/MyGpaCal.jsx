@@ -15,7 +15,6 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { defaultCourses } from "./courseData";
 import { initialGrades } from "./gradeData";
-import  Draggable from 'react-draggable';
 
 export default function GPACalculator() {
   // State initialization with localStorage
@@ -337,7 +336,8 @@ export default function GPACalculator() {
       </Paper>
 
       {/* Middle Column - GPA Calculation */}
-       <Box sx={{ 
+       <Box 
+       sx={{ 
         display: 'flex', 
         flexDirection: { xs: 'column', md: 'column' },
         justifyContent: 'center',
@@ -346,7 +346,8 @@ export default function GPACalculator() {
         p: 0,
         order: { xs: 0, md: 0 },
         mb: { xs: 1, md: 0 },
-      }}>
+      }}
+      >
         <Button 
           variant="contained" 
           color="secondary" 
