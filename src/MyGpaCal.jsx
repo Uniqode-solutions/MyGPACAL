@@ -183,8 +183,9 @@ export default function GPACalculator() {
       gap: { xs: 1, sm: 2, md: 3 },
       flexDirection: { xs: 'column', md: 'row' },
       position: 'relative',
-      maxWidth: '1800px',
+      maxWidth: '100%',
       margin: '0 auto',
+      pb: { xs: 8, sm: 8, md: 3 },
     }}>
       {/* Help button */}
       <Tooltip title={helpContent} arrow placement="left">
@@ -217,7 +218,7 @@ export default function GPACalculator() {
 
       {/* Left Column - Subject Management */}
       <Paper elevation={3} sx={{ 
-        p: { xs: 3, sm: 3 },
+        p: { xs: 2, sm: 2 },
         flex: 1,
         minWidth: 0,
         order: { xs: 1, md: 0 }
@@ -335,59 +336,9 @@ export default function GPACalculator() {
         )}
       </Paper>
 
-      {/* Middle Column - GPA Calculation */}
-       <Box 
-       sx={{ 
-        display: 'flex', 
-        flexDirection: { xs: 'column', md: 'column' },
-        justifyContent: 'center',
-        width: { xs: '100%', md: 179 },
-        gap: 2,
-        p: 0,
-        order: { xs: 0, md: 0 },
-        mb: { xs: 1, md: 0 },
-      }}
-      >
-        <Button 
-          variant="contained" 
-          color="secondary" 
-          onClick={calculateGPA}
-          fullWidth
-          size="large"
-          sx={{ height: 48 }}
-        >
-          CALCULATE GPA
-        </Button>
-
-        {gpa !== null && (
-          <Paper elevation={3} sx={{ 
-            p: 0, 
-            textAlign: 'center',
-            width: '100%',
-          }}>
-            <Typography variant="h6">Your GPA</Typography>
-            <Typography variant="h3" color="primary" sx={{ fontSize: { xs: '2.5rem', md: '3rem' } }}>
-              {gpa}
-            </Typography>
-          </Paper>
-        )}
-
-        <Button 
-          variant="outlined" 
-          color="error"
-          onClick={resetAll}
-          startIcon={<DeleteIcon />}
-          fullWidth
-        >
-          Reset All
-        </Button>
-      </Box> 
-
-
-
       {/* Right Column - Grade Management */}
       <Paper elevation={3} sx={{ 
-        p: { xs: 2, sm: 3 },
+        p: { xs: 2, sm: 2 },
         flex: 1,
         minWidth: 0,
         order: { xs: 2, md: 0 }
@@ -474,6 +425,67 @@ export default function GPACalculator() {
             Reset Defaults
           </Button>
         </Box>
+      </Paper>
+
+      {/* Fixed Floating Button - GPA Calculation Panel */}
+      <Paper 
+        elevation={5}
+        sx={{ 
+          position: 'fixed', 
+          bottom: { xs: 16, md: 24 }, 
+          left: '50%',
+          transform: 'translateX(-50%)',
+          p: 2,
+          minWidth: { xs: 'calc(100% - 32px)', sm: '320px', md: '340px' },
+          maxWidth: { xs: 'calc(100% - 32px)', sm: '340px' },
+          zIndex: 1100,
+          backgroundColor: 'background.paper',
+          boxShadow: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+        }}
+      >
+        <Button 
+          variant="contained" 
+          color="secondary" 
+          onClick={calculateGPA}
+          fullWidth
+          size="large"
+          sx={{ height: 48, fontWeight: 600 }}
+        >
+          CALCULATE GPA
+        </Button>
+
+        {gpa !== null && (
+          <Box elevation={3} sx={{ 
+            p: 2, 
+            textAlign: 'center',
+            width: '100%',
+            backgroundColor: 'action.hover',
+            borderRadius: 1,
+            border: '2px solid',
+            borderColor: 'primary.main',
+          }}>
+            <Typography variant="body2" color="textSecondary" sx={{ mb: 0.5 }}>
+              Your GPA
+            </Typography>
+            <Typography variant="h2" color="primary" sx={{ fontSize: { xs: '2rem', sm: '2.5rem' } }}>
+              {gpa}
+            </Typography>
+          </Box>
+        )}
+
+        <Button 
+          variant="outlined" 
+          color="error"
+          onClick={resetAll}
+          startIcon={<DeleteIcon />}
+          fullWidth
+          size="small"
+        >
+          Reset All
+        </Button>
       </Paper>
     </Box>
   );
