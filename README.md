@@ -44,6 +44,13 @@ If you enjoy this app, please support me on Buy Me a Coffee:
 
 Thank you for using the app and supporting the project!
 
+## Built With
+
+- React 19
+- Vite
+- Material UI
+- LocalStorage persistence
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
