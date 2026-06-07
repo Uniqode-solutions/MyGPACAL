@@ -25,7 +25,7 @@ function App() {
       <div>
         <GPACalculator />
       </div>
-      <footer>Made with ❤ by Dumiya </footer>
+      <footer>Made with ❤ by 🦄 Uniqode </footer>
     </>
   )
 }
