@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   Button, 
   TextField, 
@@ -46,6 +46,11 @@ export default function GPACalculator() {
   const [error, setError] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  // Ref for draggable panel
+  const panelRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const offsetRef = useRef({ x: 0, y: 0 });
+
   // Save to localStorage whenever state changes
   useEffect(() => {
     localStorage.setItem('gpaSubjects', JSON.stringify(subjects));
@@ -58,6 +63,44 @@ export default function GPACalculator() {
     setOpenSnackbar(false);
     setError(null);
   };
+
+  // Handle drag start
+  const handleDragStart = (e) => {
+    isDraggingRef.current = true;
+    const rect = panelRef.current.getBoundingClientRect();
+    offsetRef.current = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  };
+
+  // Setup drag listeners
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isDraggingRef.current || !panelRef.current) return;
+      
+      const newX = e.clientX - offsetRef.current.x;
+      const newY = e.clientY - offsetRef.current.y;
+      
+      panelRef.current.style.position = 'fixed';
+      panelRef.current.style.left = newX + 'px';
+      panelRef.current.style.top = newY + 'px';
+      panelRef.current.style.bottom = 'auto';
+      panelRef.current.style.transform = 'none';
+    };
+
+    const handleMouseUp = () => {
+      isDraggingRef.current = false;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   // Input validation
   const validateSubject = () => {
@@ -429,12 +472,14 @@ export default function GPACalculator() {
 
       {/* Fixed Floating Button - GPA Calculation Panel */}
       <Paper 
+        ref={panelRef}
+        onMouseDown={handleDragStart}
         elevation={5}
         sx={{ 
           position: 'fixed', 
-          bottom: { xs: 16, md: 24 }, 
-          left: '50%',
-          transform: 'translateX(-50%)',
+          bottom: { xs: 16, md: 24 },
+          left: { xs: 16, md: '50%' },
+          transform: { md: 'translateX(-50%)' },
           p: 2,
           minWidth: { xs: 'calc(100% - 32px)', sm: '320px', md: '340px' },
           maxWidth: { xs: 'calc(100% - 32px)', sm: '340px' },
@@ -444,6 +489,11 @@ export default function GPACalculator() {
           display: 'flex',
           flexDirection: 'column',
           gap: 2,
+          cursor: 'grab',
+          userSelect: 'none',
+          '&:active': {
+            cursor: 'grabbing'
+          }
         }}
       >
         <Button 
