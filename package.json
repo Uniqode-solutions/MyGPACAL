@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "jekyll:dev": "cd docs && bundle exec jekyll serve",
+    "jekyll:build": "cd docs && bundle exec jekyll build"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
