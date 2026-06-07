@@ -179,8 +179,8 @@ export default function GPACalculator() {
     <Box sx={{ 
       display: 'flex', 
       minHeight: '100vh',
-      p: { xs: 1, sm: 2, md: 3 },
-      gap: { xs: 1, sm: 2, md: 3 },
+      p: 0,
+      gap: 5,
       flexDirection: { xs: 'column', md: 'row' },
       position: 'relative',
       maxWidth: '100%',
@@ -466,6 +466,7 @@ export default function GPACalculator() {
             borderRadius: 1,
             border: '2px solid',
             borderColor: 'primary.main',
+            boxSizing: 'border-box',
           }}>
             <Typography variant="body2" color="textSecondary" sx={{ mb: 0.5 }}>
               Your GPA
